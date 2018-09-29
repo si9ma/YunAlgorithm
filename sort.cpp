@@ -105,32 +105,32 @@ namespace si9ma{
 
     template <int len>
     void sort::merge_sort(int (&arr)[len]) {
-        process(arr,0,len - 1);
+        process_merge_sort(arr, 0, len - 1);
     }
 
     void sort::merge_sort(int *arr, int len) {
-        process(arr,0,len - 1);
+        process_merge_sort(arr, 0, len - 1);
     }
 
     // 时间复杂度 --> T(N)
     template <int len>
-    void sort::process(int (&arr)[len], int L, int R) {
+    void sort::process_merge_sort(int (&arr)[len], int L, int R) {
         if (L == R)
             return;
 
         int M = ( L + R ) / 2;
-        process(arr,L,M); // 复杂度 -->T(N/2)
-        process(arr,M + 1,R); // 复杂度 -->T(N/2)
+        process_merge_sort(arr, L, M); // 复杂度 -->T(N/2)
+        process_merge_sort(arr, M + 1, R); // 复杂度 -->T(N/2)
         merge(arr,L,M,R); // 复杂度 -->T(N)
     }
 
-    void sort::process(int *arr, int L, int R) {
+    void sort::process_merge_sort(int *arr, int L, int R) {
         if (L == R)
             return;
 
         int M = ( L + R ) / 2;
-        process(arr,L,M); // 复杂度 -->T(N/2)
-        process(arr,M + 1,R); // 复杂度 -->T(N/2)
+        process_merge_sort(arr, L, M); // 复杂度 -->T(N/2)
+        process_merge_sort(arr, M + 1, R); // 复杂度 -->T(N/2)
         merge(arr,L,M,R); // 复杂度 -->T(N)
     }
 
@@ -169,5 +169,80 @@ namespace si9ma{
         for (int i = 0; i < tmp_arr_len; ++i) {
             arr[L + i] = tmp_arr[i];
         }
+    }
+
+    // use arr[R] as partition value
+    void sort::partition(int *arr, int *equal_arr, int L, int R) {
+        int less = L - 1;
+        int more = R;
+        int index = L;
+
+        while (index < more){
+            if(arr[index] < arr[R])
+                util::swap(arr,++less,index ++);
+            else if(arr[index] > arr[R])
+                util::swap(arr,--more,index);
+            else
+                index++;
+        }
+        util::swap(arr,more,R);
+
+        equal_arr[0] = less + 1;
+        equal_arr[1] = more;
+    }
+
+    // use arr[R] as partition value
+    template <int len,int len1>
+    void sort::partition(int (&arr)[len], int (&equal_arr)[len1], int L, int R){
+        int less = L - 1;
+        int more = R;
+        int index = L;
+
+        while (index < R){
+            if(arr[index] < arr[R])
+                util::swap(arr,++less,index ++);
+            else if(arr[index] > arr[R])
+                util::swap(arr,--more,index);
+            else
+                index++;
+        }
+        util::swap(arr,more,R);
+
+        equal_arr[0] = less + 1;
+        equal_arr[1] = more;
+    }
+
+    template <int len>
+    void sort::process_quick_sort(int (&arr)[len], int L, int R) {
+        if (L < R){
+            srand(time(0));
+            int equal_arr[2];
+            util::swap(arr,L + rand() % (R - L + 1),R); // random partition value
+
+            partition(arr,equal_arr,L,R);
+            process_quick_sort(arr,L,equal_arr[0] - 1);
+            process_quick_sort(arr,equal_arr[1] + 1,R);
+        }
+    }
+
+    void sort::process_quick_sort(int *arr, int L, int R) {
+        if (L < R){
+            srand(time(0));
+            int equal_arr[2];
+            util::swap(arr,L + rand() % (R - L + 1),R); // random partition value
+
+            partition(arr,equal_arr,L,R);
+            process_quick_sort(arr,L,equal_arr[0] - 1);
+            process_quick_sort(arr,equal_arr[1] + 1,R);
+        }
+    }
+
+    template <int len>
+    void sort::quick_sort(int (&arr)[len]) {
+        process_quick_sort(arr,0,len - 1);
+    }
+
+    void sort::quick_sort(int *arr, int len) {
+        process_quick_sort(arr,0,len - 1);
     }
 }

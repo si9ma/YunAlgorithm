@@ -4,53 +4,79 @@
 #include <algorithm>
 #include <min_sum.h>
 #include "util.h"
+#include "nether_lands_flag.h"
+
+// test param
+const int TEST_TIME = 100000;
+const int MAX_LEN = 10;
+const int MAX_VAL = 100;
+
+// two test array
+int *arr;
+int *arr_copy;
+
+// test array length
+int arr_len = 0;
+
+// test result
+bool is_success = true;
+
+using si9ma::util;
+using si9ma::sort;
+using si9ma::min_sum;
+using si9ma::nether_lands_flag;
+using std::cout;
+using std::endl;
+
+typedef void (*sort_func)(int *arr,int len);
+
+void test_sort(sort_func func); // sort test
+void prepare(); // prepare data
+void clean(); // clean data
 
 int main() {
-    using si9ma::util;
-    using si9ma::sort;
-    using si9ma::min_sum;
 
     srand(time(0));
-    int test_time = 100000;
-    int max_len = 10;
-    int max_val = 100;
-    int arr_len = 0;
-    int *arr;
-    int *arr_copy;
-    bool is_success = true;
 
-    for (int i = 0; i < test_time; ++i) {
-        arr = util::generate_random_array(max_len,max_val,arr_len);
-        arr_copy = new int[arr_len];
-        memcpy(arr_copy,arr, sizeof(int) * arr_len);
-
-//        sort::merge_sort(arr,arr_len);
-//        util::print_array(arr,arr_len," ");
-        int bad = min_sum::min_sum_bad(arr,arr_len);
-        int me = min_sum::min_sum_good(arr_copy,arr_len);
-        if (bad != me){
-            is_success = false;
-            util::print_array(arr,arr_len," ");
-            std::cout << "bad:" << bad << " me:" << me << std::endl;
-            delete [] arr;
-            delete [] arr_copy;
-            break;
-        }
-
-//        std::sort(arr_copy,arr_copy + arr_len);
-//        if (!util::is_equal(arr,arr_copy,arr_len)){
-//            is_success = false;
-//
-//            std::cout << "me:";
-//            util::print_array(arr,arr_len," ");
-//            std::cout << "library:";
-//            util::print_array(arr_copy,arr_len," ");
-//            break;
-//        }
-
-        delete [] arr;
-        delete [] arr_copy;
+    // test
+    for (int i = 0; i < TEST_TIME; ++i) {
+        prepare();
+        test_sort(sort::quick_sort);
+        clean();
     }
 
+    // test result
     std::cout << (is_success ? "Nice\n" : "Fuck\n");
+}
+
+void test_sort(sort_func func){
+    /* sort test */
+    // system library sort
+    func(arr,arr_len);
+
+    // tested sort
+    std::sort(arr_copy,arr_copy + arr_len);
+
+    // compare result
+    if (!util::is_equal(arr,arr_copy,arr_len)){
+        is_success = false;
+
+        util::print_array(arr,arr_len," ");
+        util::print_array(arr_copy,arr_len," ");
+    }
+    /* sort test */
+}
+
+void prepare(){
+    /* prepare two array */
+    arr = util::generate_random_array(MAX_LEN,MAX_VAL,arr_len);
+    arr_copy = new int[arr_len];
+    memcpy(arr_copy,arr, sizeof(int) * arr_len);
+    /* prepare two array */
+}
+
+void clean(){
+    // delete two array
+    delete [] arr;
+    delete [] arr_copy;
 }
