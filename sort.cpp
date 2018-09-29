@@ -2,6 +2,7 @@
 // Created by si9ma on 9/28/18.
 //
 
+#include <heap.h>
 #include "sort.h"
 #include "util.h"
 
@@ -244,5 +245,40 @@ namespace si9ma{
 
     void sort::quick_sort(int *arr, int len) {
         process_quick_sort(arr,0,len - 1);
+    }
+
+    template <int len>
+    void sort::heap_sort(int (&arr)[len]) {
+        if (len < 2)
+            return;
+
+        // build heap
+        for (int i = 0; i < len; ++i) {
+            heap::heap_insert(arr,i);
+        }
+        int heap_size = len;
+
+        util::swap(arr,0,--heap_size);
+        while (heap_size > 0){
+            heap::heapify(arr,0,heap_size);
+            util::swap(arr,0,--heap_size);
+        }
+    }
+
+    void sort::heap_sort(int *arr, int len) {
+        if (len < 2)
+            return;
+
+        // build heap
+        for (int i = 0; i < len; ++i) {
+            heap::heap_insert(arr,i);
+        }
+        int heap_size = len;
+
+        util::swap(arr,0,--heap_size);
+        while (heap_size > 0){
+            heap::heapify(arr,0,heap_size);
+            util::swap(arr,0,--heap_size);
+        }
     }
 }

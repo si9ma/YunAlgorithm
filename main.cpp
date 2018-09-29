@@ -5,6 +5,7 @@
 #include <min_sum.h>
 #include "util.h"
 #include "nether_lands_flag.h"
+#include "heap.h"
 
 // test param
 const int TEST_TIME = 100000;
@@ -24,13 +25,19 @@ bool is_success = true;
 using si9ma::util;
 using si9ma::sort;
 using si9ma::min_sum;
+using si9ma::heap;
 using si9ma::nether_lands_flag;
 using std::cout;
 using std::endl;
 
 typedef void (*sort_func)(int *arr,int len);
 
+/* test */
 void test_sort(sort_func func); // sort test
+void test_heap();
+/* test */
+
+// prepare or clean
 void prepare(); // prepare data
 void clean(); // clean data
 
@@ -41,7 +48,8 @@ int main() {
     // test
     for (int i = 0; i < TEST_TIME; ++i) {
         prepare();
-        test_sort(sort::quick_sort);
+        test_sort(sort::heap_sort);
+//        test_heap();
         clean();
     }
 
@@ -52,10 +60,10 @@ int main() {
 void test_sort(sort_func func){
     /* sort test */
     // system library sort
-    func(arr,arr_len);
+    std::sort(arr,arr + arr_len);
 
     // tested sort
-    std::sort(arr_copy,arr_copy + arr_len);
+    func(arr_copy,arr_len);
 
     // compare result
     if (!util::is_equal(arr,arr_copy,arr_len)){
@@ -63,6 +71,7 @@ void test_sort(sort_func func){
 
         util::print_array(arr,arr_len," ");
         util::print_array(arr_copy,arr_len," ");
+        cout << endl;
     }
     /* sort test */
 }
@@ -79,4 +88,17 @@ void clean(){
     // delete two array
     delete [] arr;
     delete [] arr_copy;
+}
+
+void test_heap(){
+    int heap_size = 0;
+
+    // build heap
+    for (int i = 0; i < arr_len; ++i) {
+        heap::heap_insert(arr,i);
+    }
+
+    util::print_array(arr,arr_len," ");
+    util::print_array(arr_copy,arr_len," ");
+    cout << endl;
 }

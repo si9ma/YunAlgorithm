@@ -15,6 +15,8 @@ namespace si9ma{
         template <int len> static void insertion_sort(int (&arr)[len]);
         template <int len> static void merge_sort(int (&arr)[len]);
         template <int len> static void quick_sort(int (&arr)[len]);
+        template <int len> static void heap_sort(int (&arr)[len]);
+
         template <int len> static void process_merge_sort(int (&arr)[len], int L, int R);
         template <int len> static void process_quick_sort(int (&arr)[len], int L, int R);
         template <int len> static void merge(int (&arr)[len],int L,int M,int R);
@@ -27,6 +29,8 @@ namespace si9ma{
         static void insertion_sort(int * arr,int len);
         static void merge_sort(int * arr,int len);
         static void quick_sort(int * arr,int len);
+        static void heap_sort(int * arr,int len);
+
         static void process_merge_sort(int *arr, int L, int R);
         static void process_quick_sort(int *arr, int L, int R);
         static void merge(int *arr,int L,int M,int R);
