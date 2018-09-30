@@ -270,8 +270,8 @@ namespace si9ma{
             return;
 
         // build heap
-        for (int i = 0; i < len; ++i) {
-            heap::heap_insert(arr,i);
+        for (int i = (len - 2) / 2; i >= 0 ; --i) {
+            heap::heapify(arr,i,len);
         }
         int heap_size = len;
 

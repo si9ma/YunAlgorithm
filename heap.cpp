@@ -36,7 +36,9 @@ namespace si9ma{
                 break;
             }
             util::swap(arr,largest,index);
-            L = 2 * largest + 1;
+
+            index = largest;
+            L = 2 * index + 1;
         }
     }
 
@@ -50,7 +52,9 @@ namespace si9ma{
                 break;
             }
             util::swap(arr,largest,index);
-            L = 2 * largest + 1;
+
+            index = largest;
+            L = 2 * index + 1;
         }
     }
 }
