@@ -1,8 +1,8 @@
 #include <cstring>
 #include <iostream>
-#include <sort.h>
+#include "sort.h"
 #include <algorithm>
-#include <min_sum.h>
+#include "min_sum.h"
 #include "util.h"
 #include "nether_lands_flag.h"
 #include "heap.h"
@@ -22,18 +22,18 @@ int arr_len = 0;
 // test result
 bool is_success = true;
 
-using si9ma::util;
-using si9ma::sort;
-using si9ma::min_sum;
-using si9ma::heap;
-using si9ma::nether_lands_flag;
+using si9ma::Util;
+using si9ma::Sort;
+using si9ma::MinSum;
+using si9ma::Heap;
+using si9ma::NetherLandsFlag;
 using std::cout;
 using std::endl;
 
 typedef void (*sort_func)(int *arr,int len);
 
 /* test */
-void test_sort(sort_func func); // sort test
+void test_sort(sort_func func); // Sort test
 void test_heap();
 /* test */
 
@@ -48,7 +48,7 @@ int main() {
     // test
     for (int i = 0; i < TEST_TIME; ++i) {
         prepare();
-        test_sort(sort::heap_sort);
+        test_sort(Sort::heap_sort);
 //        test_heap();
         clean();
     }
@@ -58,27 +58,27 @@ int main() {
 }
 
 void test_sort(sort_func func){
-    /* sort test */
-    // system library sort
+    /* Sort test */
+    // system library Sort
     std::sort(arr,arr + arr_len);
 
-    // tested sort
+    // tested Sort
     func(arr_copy,arr_len);
 
     // compare result
-    if (!util::is_equal(arr,arr_copy,arr_len)){
+    if (!Util::is_equal(arr,arr_copy,arr_len)){
         is_success = false;
 
-        util::print_array(arr,arr_len," ");
-        util::print_array(arr_copy,arr_len," ");
+        Util::print_array(arr,arr_len," ");
+        Util::print_array(arr_copy,arr_len," ");
         cout << endl;
     }
-    /* sort test */
+    /* Sort test */
 }
 
 void prepare(){
     /* prepare two array */
-    arr = util::generate_random_array(MAX_LEN,MAX_VAL,arr_len);
+    arr = Util::generate_random_array(MAX_LEN,MAX_VAL,arr_len);
     arr_copy = new int[arr_len];
     memcpy(arr_copy,arr, sizeof(int) * arr_len);
     /* prepare two array */
@@ -93,12 +93,12 @@ void clean(){
 void test_heap(){
     int heap_size = 0;
 
-    // build heap
+    // build Heap
     for (int i = 0; i < arr_len; ++i) {
-        heap::heap_insert(arr,i);
+        Heap::heap_insert(arr,i);
     }
 
-    util::print_array(arr,arr_len," ");
-    util::print_array(arr_copy,arr_len," ");
+    Util::print_array(arr,arr_len," ");
+    Util::print_array(arr_copy,arr_len," ");
     cout << endl;
 }
