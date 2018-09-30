@@ -11,8 +11,6 @@ namespace si9ma {
     public:
         MaxGap();
 
-        template <int len> static int max_gap(int (&arr)[len]);
-
         static int max_gap(int *arr,int len);
 
         static int bucket(int num,int len,int max,int min);

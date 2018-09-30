@@ -10,9 +10,6 @@ namespace si9ma {
     public:
         NetherLandsFlag();
 
-        template<int len, int len1>
-        static void partition(int (&arr)[len], int (&equal_arr)[len1], int L, int R, int p);
-
         static void partition(int *arr, int *equal_arr, int L, int R, int p);
     };
 }

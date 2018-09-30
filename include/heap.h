@@ -10,9 +10,6 @@ namespace si9ma {
     public:
         Heap();
 
-        template <int len> static void heap_insert(int (&arr)[len],int index);
-        template <int len> static void heapify(int (&arr)[len],int index,int cur_size);
-
         static void heap_insert(int *arr,int index);
         static void heapify(int *arr,int index,int cur_size);
     };

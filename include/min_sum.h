@@ -12,18 +12,6 @@ namespace si9ma {
     public:
         MinSum();
 
-        template<int len>
-        static int min_sum_bad(int (&arr)[len]);
-
-        template<int len>
-        static int min_sum_good(int (&arr)[len]);
-
-        template<int len>
-        static int process(int (&arr)[len], int L, int R);
-
-        template<int len>
-        static int merge(int (&arr)[len], int L, int M, int R);
-
         static int min_sum_bad(int *arr, int len);
 
         static int min_sum_good(int *arr, int len);

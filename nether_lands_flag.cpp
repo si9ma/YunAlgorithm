@@ -27,23 +27,4 @@ namespace si9ma{
         equal_arr[0] = less + 1;
         equal_arr[1] = more - 1;
     }
-
-    template <int len,int len1>
-    void NetherLandsFlag::partition(int (&arr)[len], int (&equal_arr)[len1], int L, int R, int p) {
-        int less = L - 1;
-        int more = R + 1;
-        int index = L;
-
-        while (index < R){
-            if(arr[index] < p)
-                Util::swap(arr,++less,index ++);
-            else if(arr[index] > p)
-                Util::swap(arr,--more,index);
-            else
-                index++;
-        }
-
-        equal_arr[0] = less + 1;
-        equal_arr[1] = more - 1;
-    }
 }

@@ -5,6 +5,7 @@
 #include "min_sum.h"
 #include "util.h"
 #include "nether_lands_flag.h"
+#include "max_gap.h"
 #include "heap.h"
 
 // test param
@@ -27,6 +28,7 @@ using si9ma::Sort;
 using si9ma::MinSum;
 using si9ma::Heap;
 using si9ma::NetherLandsFlag;
+using si9ma::MaxGap;
 using std::cout;
 using std::endl;
 
@@ -35,11 +37,17 @@ typedef void (*sort_func)(int *arr,int len);
 /* test */
 void test_sort(sort_func func); // Sort test
 void test_heap();
+void test_max_gap();
 /* test */
 
 // prepare or clean
 void prepare(); // prepare data
 void clean(); // clean data
+
+template <int len>
+int get_len(int (&arr)[len]){
+    return len;
+}
 
 int main() {
 
@@ -48,8 +56,9 @@ int main() {
     // test
     for (int i = 0; i < TEST_TIME; ++i) {
         prepare();
-        test_sort(Sort::heap_sort);
+//        test_sort(Sort::heap_sort);
 //        test_heap();
+        test_max_gap();
         clean();
     }
 
@@ -101,4 +110,11 @@ void test_heap(){
     Util::print_array(arr,arr_len," ");
     Util::print_array(arr_copy,arr_len," ");
     cout << endl;
+}
+
+void test_max_gap(){
+    Util::print_array(arr,arr_len," ");
+    std::sort(arr_copy,arr_copy + arr_len);
+    Util::print_array(arr_copy,arr_len," ");
+    cout << MaxGap::max_gap(arr,arr_len) << "\n" << endl;
 }
