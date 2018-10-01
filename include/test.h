@@ -17,6 +17,8 @@ bool test_new_stack();
 bool test_two_stack_queue();
 bool test_two_queue_stack();
 bool test_matrix();
+bool test_singly_linked_list();
+bool test_doubly_linked_list();
 /* test */
 
 #endif //ALGORITHM_TEST_H

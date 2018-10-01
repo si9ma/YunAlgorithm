@@ -15,6 +15,8 @@
 #include "two_stack_queue.h"
 #include "two_queue_stack.h"
 #include "matrix.h"
+#include "singly_linked_list.h"
+#include "doubly_linked_list.h"
 
 using namespace si9ma;
 using namespace std;
@@ -191,3 +193,48 @@ bool test_matrix(){
     return true;
 }
 
+bool test_singly_linked_list(){
+    SinglyLinkedList linkedList;
+
+    try {
+        linkedList.insert(8);
+        linkedList.print_list();
+        linkedList.insert(9);
+        linkedList.print_list();
+        linkedList.insert(10);
+        linkedList.print_list();
+        linkedList.push_back(11);
+        linkedList.print_list();
+        linkedList.insert(12,1);
+        linkedList.print_list();
+        linkedList.reverse_list();
+        linkedList.print_list();
+        return true;
+    }catch (const char * str){
+        cout << str << endl;
+    }
+}
+
+bool test_doubly_linked_list(){
+    DoublyLinkedList linkedList;
+
+    try {
+        linkedList.insert(8);
+        linkedList.print_list();
+        linkedList.insert(9);
+        linkedList.print_list();
+        linkedList.insert(10);
+        linkedList.print_list();
+        linkedList.push_back(11);
+        linkedList.print_list();
+        linkedList.insert(12,1);
+        linkedList.print_list();
+        linkedList.reverse_list();
+        linkedList.print_list();
+        linkedList.print_list_reverse();
+
+        return true;
+    }catch (const char * str){
+        cout << str << endl;
+    }
+}

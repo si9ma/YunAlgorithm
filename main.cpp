@@ -26,7 +26,7 @@ int arr_len = 0;
 // test result
 bool is_success = true;
 // just test once
-bool is_once = false;
+bool is_once = true;
 // allow negative value
 bool allow_negative = false;
 
@@ -44,9 +44,9 @@ int main() {
     // test
     for (int i = 0; i < TEST_TIME; ++i) {
         prepare();
-        is_success = test_sort(Sort::radix_sort);
-//        test_fun_ptr = test_matrix;
-//        is_success = test_fun_ptr();
+//        is_success = test_sort(Sort::radix_sort);
+        test_fun_ptr =test_doubly_linked_list;
+        is_success = test_fun_ptr();
         clean();
 
         if (is_once || !is_success)
