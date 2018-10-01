@@ -20,7 +20,7 @@ namespace si9ma{
         // generate a random array with random length and random value
         // return a pointer to array,change final_len as array length
         // can't generate really max_val,max value is max_val - 1
-        static int * generate_random_array(int max_len,int max_val,int &final_len);
+        static int * generate_random_array(int max_len,int max_val,int &final_len, bool allow_negative);
 
         static void print_array(const int * arr, const int len,std::string separator);
 

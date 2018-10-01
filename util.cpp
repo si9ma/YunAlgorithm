@@ -29,12 +29,15 @@ namespace si9ma{
         arr[idx1] = tmp;
     }
 
-    int* Util::generate_random_array(int max_len, int max_val, int &final_len)
+    int* Util::generate_random_array(int max_len, int max_val, int &final_len, bool allow_negative)
     {
         final_len = rand() % max_len + 1; // 1 ~ max_len
         int *array = new int[final_len];
         for (int i = 0; i < final_len; ++i) {
-            array[i] = (rand() % max_val) - (rand() % max_val); // -(max_val - 1) ~ max_val - 1
+            if (allow_negative)
+                array[i] = (rand() % max_val) - (rand() % max_val); // -(max_val - 1) ~ max_val - 1
+            else
+                array[i] = rand() % max_val;
         }
 
         return array;

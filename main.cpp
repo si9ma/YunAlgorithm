@@ -27,6 +27,8 @@ int arr_len = 0;
 bool is_success = true;
 // just test once
 bool is_once = false;
+// allow negative value
+bool allow_negative = false;
 
 // test function pointer
 test_func_type test_fun_ptr;
@@ -42,9 +44,9 @@ int main() {
     // test
     for (int i = 0; i < TEST_TIME; ++i) {
         prepare();
-//        is_success = test_sort(Sort::heap_sort);
-        test_fun_ptr = test_matrix;
-        is_success = test_fun_ptr();
+        is_success = test_sort(Sort::radix_sort);
+//        test_fun_ptr = test_matrix;
+//        is_success = test_fun_ptr();
         clean();
 
         if (is_once || !is_success)
@@ -57,7 +59,7 @@ int main() {
 
 void prepare(){
     /* prepare two array */
-    arr = Util::generate_random_array(MAX_LEN,MAX_VAL,arr_len);
+    arr = Util::generate_random_array(MAX_LEN,MAX_VAL,arr_len,allow_negative);
     arr_copy = new int[arr_len];
     memcpy(arr_copy,arr, sizeof(int) * arr_len);
     /* prepare two array */
