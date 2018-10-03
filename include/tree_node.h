@@ -11,6 +11,7 @@ namespace si9ma {
         int value;
         TreeNode *left;
         TreeNode *right;
+        TreeNode *parent;
 
         TreeNode(int value);
         ~TreeNode();

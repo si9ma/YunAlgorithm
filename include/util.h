@@ -6,6 +6,10 @@
 #define ALGORITHM_UTIL_H
 
 #include <string>
+#include <vector>
+#include <queue>
+
+using namespace std;
 
 namespace si9ma{
     class Util {
@@ -25,6 +29,8 @@ namespace si9ma{
         static void print_array(const int * arr, const int len,std::string separator);
 
         static bool is_equal(const int * arr1,const int * arr2,int len);
+
+        static void split(const string &s,char delim,queue<string> &v);
     };
 }
 

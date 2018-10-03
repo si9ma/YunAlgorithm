@@ -285,10 +285,20 @@ bool test_binary_search(){
 }
 
 bool test_binary_tree(){
-    auto *head = new TreeNode(10);
-    head->right = new TreeNode(30);
-    head->right->left = new TreeNode(32);
-    head->right->right = new TreeNode(44);
+    auto *head = new TreeNode(1);
+    head->left = new TreeNode(2);
+    head->right = new TreeNode(3);
+    head->right->left = new TreeNode(6);
+//    head->right->right = new TreeNode(7);
+    head->left->left = new TreeNode(4);
+    head->left->right = new TreeNode(5);
+
+    head->left->right->parent = head->left;
+    head->left->left->parent = head->left;
+//    head->right->right->parent = head->right;
+    head->right->left->parent = head->right;
+    head->right->parent = head;
+    head->left->parent = head;
 
     BinaryTree::print_tree(head);
     cout << "\npre_order:" << endl;
@@ -305,10 +315,39 @@ bool test_binary_tree(){
     BinaryTree::iterative_in_order(head);
     cout << "\npos_order:" << endl;
     BinaryTree::iterative_pos_order(head);
+    cout << "\nlevel print:" << endl;
+    BinaryTree::level_print(head);
 
     cout << "\nis balance tree:" << boolalpha << BinaryTree::is_balance_tree(head).is_balance << endl;
+    cout << "\nmax distance:" << BinaryTree::get_max_distance(head).max_distance << endl;
+    cout << "\nis search tree:" << boolalpha << BinaryTree::is_search_tree(head) << endl;
+    cout << "\nis search tree:" << boolalpha << BinaryTree::is_search_tree_recursive(head).is_search << endl;
+
+    cout << "\nnext of " << head->left->right->value << " is:" << BinaryTree::get_next(head->left->right)->value << endl;
+    cout << "\nprev of " << head->left->right->value << " is:" << BinaryTree::get_pre(head->left->right)->value << endl;
+
+    string serial_res = BinaryTree::in_order_serial(head);
+    string serial_res1 = BinaryTree::level_serial(head);
+    cout << "\nserial tree:" << serial_res << endl;
+    cout << "\nlevel serial tree:" << serial_res1 << endl;
+    BinaryTree::destroy_tree(head);
+
+    auto *head2 = BinaryTree::restory_tree_pre_order(serial_res);
+    auto *head3 = BinaryTree::restory_tree_level(serial_res1);
+    BinaryTree::print_tree(head2);
+    BinaryTree::print_tree(head3);
+
+    BinaryTree::paper_fold_print(4);
+
+    cout << "\n is complete binary tree:" << boolalpha << BinaryTree::is_complete_binary_tree(head2) << endl;
+
+    cout << "\ntree node count:" << BinaryTree::get_node_count(head2) << endl;
 
     cout << endl;
-    BinaryTree::destroy_tree(head);
+
+    BinaryTree::destroy_tree(head2);
+    BinaryTree::destroy_tree(head3);
+
+    cout << endl;
     return true;
 }

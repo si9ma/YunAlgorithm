@@ -12,6 +12,7 @@ namespace si9ma{
         this->value = value;
         left = nullptr;
         right = nullptr;
+        parent = nullptr;
     }
 
     TreeNode::~TreeNode() {

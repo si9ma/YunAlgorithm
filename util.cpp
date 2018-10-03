@@ -59,5 +59,18 @@ namespace si9ma{
 
         return true;
     }
+
+    void Util::split(const string &s, char delim,queue<string> &v) {
+        auto i = 0;
+        auto pos = s.find(delim);
+        while (pos != string::npos) {
+            v.push(s.substr(i, pos-i));
+            i = ++pos;
+            pos = s.find(delim, pos);
+
+            if (pos == string::npos)
+                v.push(s.substr(i, s.length()));
+        }
+    }
 }
 
