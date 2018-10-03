@@ -6,12 +6,16 @@
 #include "singly_node.h"
 
 namespace si9ma{
-    SinglyNode::SinglyNode(int val) {
+    SinglyNodeWithRand::SinglyNodeWithRand(int val) {
         this->value = val;
         next = nullptr;
     }
 
-    SinglyNode::~SinglyNode() {
+    SinglyNodeWithRand::~SinglyNodeWithRand() {
         std::cout << "destroy SinglyNode(" << value << ")" << std::endl;
+    }
+
+    void SinglyNodeWithRand::set_rand(SinglyNodeWithRand *val) {
+        rand = val;
     }
 }

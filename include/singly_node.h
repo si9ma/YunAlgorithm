@@ -7,14 +7,16 @@
 
 
 namespace si9ma {
-    class SinglyNode {
+    class SinglyNodeWithRand {
     public:
-        SinglyNode * next;
+        SinglyNodeWithRand * next;
+        SinglyNodeWithRand * rand;
         int value;
 
-        SinglyNode(int val);
-        SinglyNode() = default;
-        ~SinglyNode();
+        SinglyNodeWithRand(int val);
+        SinglyNodeWithRand() = default;
+        void set_rand(SinglyNodeWithRand *val);
+        ~SinglyNodeWithRand();
     };
 }
 

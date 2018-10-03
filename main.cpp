@@ -5,6 +5,7 @@
 #include "sort.h"
 #include "test.h"
 #include "util.h"
+#include "scratches.h"
 
 using si9ma::Util;
 using si9ma::Sort;
@@ -29,6 +30,8 @@ bool is_success = true;
 bool is_once = true;
 // allow negative value
 bool allow_negative = false;
+// scratches test
+extern bool is_scratches_test;
 
 // test function pointer
 test_func_type test_fun_ptr;
@@ -39,13 +42,18 @@ void clean(); // clean data
 
 int main() {
 
+    if (is_scratches_test){
+        test_scratches();
+        return 0;
+    }
+
     srand(time(0));
 
     // test
     for (int i = 0; i < TEST_TIME; ++i) {
         prepare();
 //        is_success = test_sort(Sort::radix_sort);
-        test_fun_ptr =test_doubly_linked_list;
+        test_fun_ptr = test_binary_tree;
         is_success = test_fun_ptr();
         clean();
 
