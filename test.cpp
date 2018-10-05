@@ -1,13 +1,18 @@
 #include "test.h"
 #include <cstring>
 #include <iostream>
+#include "lowest_lexicography.h"
 #include "sort.h"
 #include <algorithm>
 #include "min_sum.h"
 #include "util.h"
+#include "trie.h"
+#include "tree_node.h"
 #include "nether_lands_flag.h"
 #include "max_gap.h"
+#include "random_pool.h"
 #include "heap.h"
+#include "union_find_set.h"
 #include "array_stack.h"
 #include "array_queue.h"
 #include <string>
@@ -184,12 +189,13 @@ bool test_sort(sort_func func){
 }
 
 bool test_matrix(){
-    Matrix matrix(10,10,100,true,true);
+    Matrix matrix(10,10,2,true,true,false);
     matrix.print_matrix();
+    cout << "island count:" << matrix.get_island_count() << endl;
 //    matrix.print_matrix_rotate();
 //    matrix.rotate_matrix();
 //    matrix.print_matrix();
-    matrix.print_matrix_round();
+//    matrix.print_matrix_round();
 
     cout << "---------------------------------"<< endl;
 
@@ -350,4 +356,51 @@ bool test_binary_tree(){
 
     cout << endl;
     return true;
+}
+
+bool test_random_pool(){
+    RandomPool randomPool;
+
+    randomPool.put("hello");
+    randomPool.put("baidu");
+    randomPool.put("nihao");
+    randomPool.delete_key("nihao");
+    randomPool.delete_key("baidu");
+
+    cout << randomPool.get_random() << endl;
+    cout << randomPool.get_random() << endl;
+    cout << randomPool.get_random() << endl;
+
+    return true;
+}
+
+bool test_union_find_set(){
+    int arr[] = {1,4,6,8,2,78,23,34,45};
+    UnionFindSet unionFindSet(arr, sizeof(arr)/ sizeof(int));
+
+    cout << boolalpha << unionFindSet.is_same_set(4,6) << endl;
+    unionFindSet.union_set(4,6);
+    unionFindSet.union_set(6,45);
+    cout << boolalpha << unionFindSet.is_same_set(4,45) << endl;
+    return true;
+}
+
+bool test_trie(){
+    TrieNode *root = new TrieNode(0,0);
+
+    Trie::insert(root,"hello");
+    Trie::insert(root,"he");
+
+    cout << Trie::search(root,"hello") << endl;
+    Trie::delete_str(root,"hello");
+    cout << Trie::prefix_search(root,"he") << endl;
+    Trie::destroy(root);
+
+    return true;
+}
+
+bool test_lowest_lexicography(){
+    vector<string> strs = {{"jfkd","fudaif","23jfdh","uiuiih","jfjp1"}};
+
+    cout << LowestLexicography::lowest_lexicography(strs) << endl;
 }

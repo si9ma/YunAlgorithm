@@ -7,9 +7,9 @@
 #include "matrix.h"
 
 namespace si9ma{
-    Matrix::Matrix(int row_len, int col_len, int val, bool is_random, bool is_square) {
+    Matrix::Matrix(int row_len, int col_len, int val, bool is_random, bool is_square, bool allow_negative) {
         if(is_random)
-            generate_random_matrix(row_len,col_len,val,is_square);
+            generate_random_matrix(row_len,col_len,val,is_square,allow_negative);
         else{
             this->row_len = row_len;
             this->col_len = col_len;
@@ -26,7 +26,7 @@ namespace si9ma{
         }
     }
 
-    void Matrix::generate_random_matrix(int max_row, int max_col, int max_val, bool is_square) {
+    void Matrix::generate_random_matrix(int max_row, int max_col, int max_val, bool is_square, bool allow_negative) {
         row_len = rand() % max_row + 1;
         col_len = rand() % max_col + 1;
         if (is_square)
@@ -36,7 +36,10 @@ namespace si9ma{
         for (int i = 0; i < row_len; ++i) {
             array[i] = new int[col_len];
             for (int j = 0; j <col_len; ++j) {
-                array[i][j] = (rand() % max_val) - (rand() % max_val); // -(max_val - 1) ~ max_val - 1
+                if (allow_negative)
+                    array[i][j] = (rand() % max_val) - (rand() % max_val); // -(max_val - 1) ~ max_val - 1
+                else
+                    array[i][j] = rand() % max_val;
             }
         }
 
@@ -161,5 +164,32 @@ namespace si9ma{
         }
 
         std::cout << std::endl;
+    }
+
+    int Matrix::get_island_count() {
+        int count = 0;
+
+        for (int i = 0; i < row_len; ++i) {
+            for (int j = 0; j < col_len; ++j) {
+                if (array[i][j] == 1){
+                    count ++;
+                    infection(i,j);
+                }
+            }
+        }
+
+        return count;
+    }
+
+    void Matrix::infection(int cur_row, int cur_col) {
+        if ( cur_col < 0 || cur_row < 0 || cur_row == row_len
+                                           || cur_col == col_len || array[cur_row][cur_col] != 1)
+            return;
+
+        array[cur_row][cur_col] = 2;
+        infection(cur_row + 1,cur_col);
+        infection(cur_row - 1,cur_col);
+        infection(cur_row,cur_col + 1);
+        infection(cur_row,cur_col - 1);
     }
 }

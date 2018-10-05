@@ -53,7 +53,7 @@ int main() {
     for (int i = 0; i < TEST_TIME; ++i) {
         prepare();
 //        is_success = test_sort(Sort::radix_sort);
-        test_fun_ptr = test_binary_tree;
+        test_fun_ptr = test_lowest_lexicography;
         is_success = test_fun_ptr();
         clean();
 

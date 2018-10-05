@@ -22,6 +22,10 @@ bool test_doubly_linked_list();
 bool test_binary_search();
 bool test_scratches();
 bool test_binary_tree();
+bool test_random_pool();
+bool test_union_find_set();
+bool test_trie();
+bool test_lowest_lexicography();
 /* test */
 
 #endif //ALGORITHM_TEST_H

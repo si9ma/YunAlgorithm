@@ -14,16 +14,17 @@ namespace si9ma {
         int row_len;
         int col_len;
         int **array;
-        void generate_random_matrix(int max_row,int max_col,int max_val,bool is_square);
+        void generate_random_matrix(int max_row,int max_col,int max_val,bool is_square, bool allow_negative);
         void print_rectangle(int r1,int c1,int r2,int c2,string separator = " ");
         void rotate_square(int r1,int c1,int r2,int c2);
         void print_line(int r1,int c1,int r2,int c2, bool is_down_to_up,string separator = " ");
+        void infection(int cur_row,int cur_col);
 
     public:
         Matrix() = default;
 
         // when is_random is true,row_len/col_len/val are random value < row_len/col_len/val
-        Matrix(int row_len,int col_len,int val, bool is_random, bool is_square);
+        Matrix(int row_len,int col_len,int val, bool is_random, bool is_square, bool allow_negative);
 
         ~Matrix();
 
@@ -34,6 +35,8 @@ namespace si9ma {
         void rotate_matrix();
 
         void print_matrix_round(string separator = " ");
+
+        int get_island_count();
     };
 }
 
