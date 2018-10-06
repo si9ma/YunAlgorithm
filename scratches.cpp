@@ -13,12 +13,13 @@ using namespace std;
 bool is_scratches_test = false;
 
 bool test_scratches(){
-    vector<string> str_arr = {"a","ac","mnlbzxtgdacwmqvykwjgixa","eurpyngnmilbtmjpsabesfx","ab","abd","abc","abb","acd","aca"};
+    vector<int> nums{1,3,4,6,9,23,34,56};
+    for(int last_nonzero_idx=0,cur=0;cur < nums.size();cur++){
+        if(nums[cur] %2 == 0)
+            swap(nums[last_nonzero_idx++],nums[cur]);
+    }
 
-    sort(str_arr.begin(),str_arr.end());
-    stable_sort(str_arr.begin(),str_arr.end(), [](const string a, const string b) {return a.size() > b.size(); });
-
-    for(string item:str_arr){
-        cout << item << endl;
+    for (int item:nums){
+        cout << item << " ";
     }
 }

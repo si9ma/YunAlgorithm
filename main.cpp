@@ -27,7 +27,7 @@ int arr_len = 0;
 // test result
 bool is_success = true;
 // just test once
-bool is_once = true;
+bool is_once = false;
 // allow negative value
 bool allow_negative = false;
 // scratches test
@@ -53,7 +53,7 @@ int main() {
     for (int i = 0; i < TEST_TIME; ++i) {
         prepare();
 //        is_success = test_sort(Sort::radix_sort);
-        test_fun_ptr = test_lowest_lexicography;
+        test_fun_ptr = test_dp;
         is_success = test_fun_ptr();
         clean();
 

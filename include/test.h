@@ -26,6 +26,7 @@ bool test_random_pool();
 bool test_union_find_set();
 bool test_trie();
 bool test_lowest_lexicography();
+bool test_dp();
 /* test */
 
 #endif //ALGORITHM_TEST_H

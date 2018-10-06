@@ -2,6 +2,7 @@
 #include <cstring>
 #include <iostream>
 #include "lowest_lexicography.h"
+#include "dp.h"
 #include "sort.h"
 #include <algorithm>
 #include "min_sum.h"
@@ -403,4 +404,12 @@ bool test_lowest_lexicography(){
     vector<string> strs = {{"jfkd","fudaif","23jfdh","uiuiih","jfjp1"}};
 
     cout << LowestLexicography::lowest_lexicography(strs) << endl;
+}
+
+bool test_dp(){
+    int arr[]{1,2,3,4,5,6};
+    cout << DP::find_way_recursive(arr, sizeof(arr) / sizeof(int),1,3,6) << endl;
+    cout << DP::find_way_dp(arr, sizeof(arr) / sizeof(int),1,3,6) << endl;
+    cout << DP::save_money_recursive(arr, sizeof(arr) / sizeof(arr[0]),0,105) << endl;
+    cout << DP::save_money_dp(arr, sizeof(arr) / sizeof(arr[0]),0,105) << endl;
 }
